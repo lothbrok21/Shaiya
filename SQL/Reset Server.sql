@@ -12,5 +12,3 @@ USE PS_GMTool
 EXEC sp_MSForEachTable 'TRUNCATE TABLE ?'
 USE PS_STATICS
 EXEC sp_MSForEachTable 'TRUNCATE TABLE ?'
-USE WebResource
-EXEC sp_MSForEachTable 'TRUNCATE TABLE ?'
