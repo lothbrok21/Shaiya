@@ -1,4 +1,4 @@
-**ps_game functions**
+**PS_Game Functions**
 ```asm
 004011E0 - SAgent::GetStatistics
 004059B0 - CGameData::GetItemInfo
