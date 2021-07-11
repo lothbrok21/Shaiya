@@ -1,0 +1,2 @@
+UPDATE PS_GameDefs.dbo.MobItems Set Grade = '',DropRate = '' WHERE MobID = '' AND ItemOrder = '' -- One by one
+UPDATE PS_GameDefs.dbo.MobItems Set ItemOrder = '',Grade = '',DropRate = '' WHERE MobID BETWEEN '' AND '' -- In a range
