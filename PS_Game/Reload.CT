@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>832</ID>
+      <Description>"CServerApp::InitConsoleCommand"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+  Date   : 31.01.2022
+  Author : Lothbrok
+}
+[ENABLE]
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem:
+push 01
+push -01
+push 00 // Param count.
+push reload_command
+push 45
+mov ecx,esi
+call ps_game.exe+F5BE0 // SConsole::AddCommand
+
+originalcode:
+pop esi
+ret
+
+reload_command:
+db '/reload',00
+
+exit:
+jmp returnhere
+
+"ps_game.exe"+9459:
+jmp newmem
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+dealloc(newmem)
+"ps_game.exe"+9459:
+pop esi
+ret 
+int 3 
+int 3 
+int 3 
+//Alt: db 5E C3 CC CC CC
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>834</ID>
+      <Description>"CServerApp::OnConsoleCommand"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+  Date   : 31.01.2022
+  Author : Lothbrok
+}
+[ENABLE]
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem:
+cmp eax,45
+je reload_command_code
+originalcode:
+cmp eax,44
+ja ps_game.exe+B3D4
+
+reload_command_code:
+call ps_game.exe+D410 // Load data.
+push reload_command_output
+push edi
+call ps_game.exe+11A8CD // Sprintf
+add esp,08
+jmp ps_game.exe+B3D4
+
+reload_command_output:
+db 'cmd reload ok',00
+
+exit:
+jmp returnhere
+
+"ps_game.exe"+948F:
+jmp newmem
+nop 4
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+dealloc(newmem)
+"ps_game.exe"+948F:
+cmp eax,44
+ja ps_game.exe+B3D4
+//Alt: db 83 F8 44 0F 87 3C 1F 00 00
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
