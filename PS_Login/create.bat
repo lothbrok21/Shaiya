@@ -1,0 +1,1 @@
+nasm -o ps_login.exe asm/ps_login.asm

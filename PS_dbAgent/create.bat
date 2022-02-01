@@ -1,0 +1,1 @@
+nasm -o ps_dbAgent.exe asm/ps_dbAgent.asm
