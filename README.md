@@ -1,6 +1,7 @@
 ### PS_Game
 #### Scripts
 `Reload` Adds a command to help us reload data.
+`Stats` Shows character stats.
 
 ### PS_Login
 

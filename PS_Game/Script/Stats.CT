@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>836</ID>
+      <Description>"CUser::SetAttack"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+  Date   :  04.02.2022
+  Credits : Eric Dutra
+}
+
+[ENABLE]
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+alloc(stats_packet,52)
+
+newmem:
+
+originalcode:
+mov [esi+00001434],ecx
+pushad
+call stats_packet_addr
+popad
+
+exit:
+jmp returnhere
+
+
+stats_packet_addr:
+call stats_size
+mov dword ptr [stats_packet],00000526
+//STR
+movzx eax, word ptr[esi+0000121C]
+movzx ebx, word ptr[esi+0000016C]
+sub eax, ebx
+mov word ptr[stats_packet+00000002],ax
+//DEX
+movzx eax, word ptr[esi+00001220]
+movzx ebx, word ptr[esi+00000016E]
+sub eax, ebx
+mov word ptr[stats_packet+00000012],ax
+//INT
+movzx eax, word ptr[esi+00001224]
+movzx ebx, word ptr[esi+00000170]
+sub eax, ebx
+mov word ptr[stats_packet+0000000A],ax
+//WIS
+movzx eax, word ptr[esi+00001228]
+movzx ebx, word ptr[esi+00000172]
+sub eax, ebx
+mov word ptr[stats_packet+0000000E],ax
+//REC
+movzx eax, word ptr[esi+0000122C]
+movzx ebx, word ptr[esi+00000174]
+sub eax, ebx
+mov word ptr[stats_packet+00000006],ax
+//LUC
+movzx eax, word ptr[esi+00001230]
+movzx ebx, word ptr[esi+00000176]
+sub eax, ebx
+mov word ptr[stats_packet+00000016],ax
+//ATK
+movzx eax, word ptr[esi+000013CC]
+mov word ptr[stats_packet+0000001A],ax
+movzx ebx, word ptr[esi+000012E4]
+add eax, ebx
+mov word ptr[stats_packet+0000001E],ax
+//MAGIC
+movzx eax, word ptr[esi+00001424]
+mov word ptr[stats_packet+00000022],ax
+movzx ebx, word ptr[esi+000012E4]
+add eax, ebx
+mov word ptr[stats_packet+00000026],ax
+//DEF
+movzx eax, word ptr[esi+000013D4]
+mov word ptr[stats_packet+0000002A],ax
+//RESIST
+movzx eax, word ptr[esi+0000142C]
+mov word ptr[stats_packet+0000002E],ax
+push 50
+lea ecx, [stats_packet]
+push ecx
+mov ecx, esi
+call 004ED0E0 // SConnection::Send
+ret
+
+
+stats_size:
+mov eax,0
+loop:
+cmp eax,(int)50
+jge end_loop
+mov byte ptr [stats_packet+eax],0
+inc eax
+jmp loop
+
+end_loop:
+ret
+
+
+00460FFF:
+jmp newmem
+nop
+returnhere:
+
+
+
+
+[DISABLE]
+dealloc(newmem)
+00460FFF:
+mov [esi+00001434],ecx
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
