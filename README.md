@@ -3,7 +3,7 @@
 - `Reload` Adds a command to help us reload data.
 - `Stats` Shows character stats.
 ### Data
-- `NPC Orient Logic` (Degree * (π/180)).
+- `NPC Orient Logic` [Degree * (π/180)].
 ### PS_Login
 - A modified version of the original `Episode 4 PS_Login` binary, where we can apply fixes or add new packets.
 ### PS_dbAgent
