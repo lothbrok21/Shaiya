@@ -14,7 +14,9 @@
 ### Building
 - PS_Login project is built with  [NASM]. Simply run `nasm -o ps_dbAgent.exe asm/ps_dbAgent.asm` in the root directory.
 - PS_dbAgent project is built with [NASM]. Simply run `nasm -o ps_login.exe asm/ps_login.asm` in the root directory.
-- PSM_Agent, `C:\ShaiyaServer\SERVER\PSM_Client\PSMagent.dll` 👉 Replace by your PSMagent.dll \n Run `Install.sql`.
+- PSM_Agent,
+> `C:\ShaiyaServer\SERVER\PSM_Client\PSMagent.dll` Replace by your PSMagent.dll
+> Run `Install.sql`.
 ### PE
 - To create the pe.asm file simply run `./pe exename.exe` in the PE directory.
 - Use [petools] to add section for your custom code.
