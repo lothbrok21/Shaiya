@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>836</ID>
+      <Description>"CUser::CriticalSuccess"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+  Date   :  12.12.2019
+  Credits : Bowie
+}
+
+[ENABLE]
+00459B13: { Magic Attacks }
+nop 2
+
+00459D8D: { Range Attacks }
+nop 6
+
+00459FFF: { Melee Attacks }
+nop 2
+
+[DISABLE]
+00459B13:
+jnl 00459B6E
+
+00459D8D:
+jnl 00459E22
+
+00459FFF:
+jnl 0045A05A
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
