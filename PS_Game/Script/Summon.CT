@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Client Side  { US Patch 183 }"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+  Date   :  27.06.2022
+  Credits : Cups
+}
+[ENABLE]
+alloc(write_summon_destination,2048)
+alloc(summon_dest_map_name,128)
+alloc(dialogue_text_box,128)
+
+write_summon_destination:
+push eax
+push ecx
+mov eax,dword [summon_dest_map_id]
+push eax
+push summon_dest_map_name
+mov ecx,008655E8
+call 004D2E90
+pop ecx
+
+push summon_dest_map_name
+push 021FE604
+push dialogue_text
+push dialogue_text_box
+call sprintf
+add esp,10
+mov eax,dialogue_text_box
+jmp 00528E8D
+
+read_summon_packet:
+push 4
+lea eax,[esp+4]
+push eax
+call 0059FB80
+
+mov ecx,[esp+8]
+push 2
+push summon_dest_map_id
+call 0059FB80
+jmp 00596271
+
+dialogue_text:
+db 'Accept {c2}%s`s{/c} summoning?\n\nYou will be moved to:\n{c3}%s{/c}\n', 0
+
+summon_dest_map_id:
+dd 0
+
+00528E7F:
+jmp write_summon_destination
+
+00596265:
+jmp read_summon_packet
+
+[DISABLE]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Server Side"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+  Date   : 27.06.2022
+  Author : Lothbrok
+  Credits : Cups
+}
+[ENABLE]
+alloc(re_write_summon_packet,2048)
+
+re_write_summon_packet:
+push 08 { Packet size }
+lea ecx,[esp+2C]
+add eax,000088B8
+push ax
+mov ax,word ptr[edi+160] { edi : Player sending the summon. }
+mov word ptr[ecx+6],ax
+pop ax
+push ecx { Packet }
+mov ecx,esi
+mov [esi+00001498],edx
+mov [esi+0000149C],eax
+call 004ED0E0 { SConnection::Send }
+jmp 0049E513
+
+0049E4F4:
+jmp re_write_summon_packet
+nop
+returnhere:
+ 
+[DISABLE]
+dealloc(re_write_summon_packet)
+0049E4F4:
+push 06
+lea ecx,[esp+2C]
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of je game.exe+DD862</Description>
+      <AddressString>game.exe+DD846</AddressString>
+      <Before>
+        <Byte>FE</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>1A</Byte>
+      </Actual>
+      <After>
+        <Byte>FF</Byte>
+        <Byte>D5</Byte>
+        <Byte>5F</Byte>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of add eax,00</Description>
+      <AddressString>game.exe+DD84B</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>FF</Byte>
+        <Byte>D5</Byte>
+        <Byte>5F</Byte>
+      </Before>
+      <Actual>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>5D</Byte>
+        <Byte>89</Byte>
+        <Byte>86</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of je game.exe+C0567</Description>
+      <AddressString>game.exe+C0551</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>14</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>14</Byte>
+      </Actual>
+      <After>
+        <Byte>A1</Byte>
+        <Byte>08</Byte>
+        <Byte>E7</Byte>
+        <Byte>1F</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jle game.exe+C059D</Description>
+      <AddressString>game.exe+C057A</AddressString>
+      <Before>
+        <Byte>07</Byte>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>7E</Byte>
+        <Byte>21</Byte>
+      </Actual>
+      <After>
+        <Byte>A1</Byte>
+        <Byte>9C</Byte>
+        <Byte>85</Byte>
+        <Byte>70</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp bl,20</Description>
+      <AddressString>game.exe+A362D</AddressString>
+      <Before>
+        <Byte>84</Byte>
+        <Byte>9A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>80</Byte>
+        <Byte>FB</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>85</Byte>
+        <Byte>91</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jne game.exe+A36C7</Description>
+      <AddressString>game.exe+A3630</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>80</Byte>
+        <Byte>FB</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>85</Byte>
+        <Byte>91</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>34</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

@@ -3,6 +3,7 @@
 - `Reload` Adds a command to help us reload data.
 - `Stats` Shows character stats.
 - `Critical` Enables perma critical.
+- `Summon` Modify the summon packet to include the destination map.
 ### Data
 - `NPC Orient Logic` [Degree * (π/180)].
 ### PS_Login
